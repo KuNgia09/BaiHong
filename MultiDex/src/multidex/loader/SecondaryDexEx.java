@@ -139,23 +139,7 @@ public class SecondaryDexEx {
 			Log.d(TAG,"[+]"+e.toString());
 			e.printStackTrace();
 		}
-/*
-        File file_sdcard=new File("/storage/sdcard1/lol.md");
-        if(file_sdcard.exists()){
-        	Log.d(TAG,"[+]"+file_sdcard.getAbsolutePath()+"have existed");
-        	file_sdcard.delete();
-        }
 
-    	try {
-			file_sdcard.createNewFile();
-			Log.d(TAG,"[+]"+file_sdcard.getAbsolutePath()+"created success");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.d(TAG,"[+]"+e.toString());
-			e.printStackTrace();
-		}
-    	
-*/
         //释放so文件
         DropperSo(appContext);
         ZipFile apkFile = null;
@@ -179,13 +163,10 @@ public class SecondaryDexEx {
             if(zipEntry == null) {
                 break;
             }
-            /*
-             * 此时产生的Dex File path:
-             * /data/data/com.example.test/app_odex/classes.dex
-             * */
+            //将dex文件加入到msLoadDexList
             msLoadedDexList.add(new LoadedDex(filesDir,possibleDexName,zipEntry));
         }
-//        Log.i(TAG, "dex size:"+msLoadedDexList.size());
+//      Log.i(TAG, "dex size:"+msLoadedDexList.size());
         File theFile=new File(filesDir.getAbsolutePath()+"/classes2.dex");
         Log.d(TAG,"extracted file path is "+theFile.getAbsolutePath());
         //如果不存在提取classes2.dex
@@ -246,11 +227,8 @@ public class SecondaryDexEx {
             Log.i(TAG, "install dex error:"+Log.getStackTraceString(e));
         }
     }
-    /*
-     * 释放Asset下的so文件到getFilesDir()目录
-     * 
-     * 
-     * */
+    //释放Asset目录下的so文件到getFilesDir()目录下
+    
     private static void DropperSo(Context ctx){
     	//context.getFilesDir().getAbsolutePath()
     	String dropperPath=ctx.getFilesDir().getAbsolutePath();
@@ -289,13 +267,8 @@ public class SecondaryDexEx {
 			e.printStackTrace();
 		}
     }
-    /**
-     * 杩欓噷闇�瑕佹敞鍏exClassLoader
-     * 鍥犱负GDT鍐呴儴鐐瑰嚮骞垮憡鏄幓涓嬭浇App,鏄惎鍔ㄤ竴涓狣ownloadService鍘讳笅杞紸pp
-     * 鎵�浠ヨ繖閲岄渶瑕佽繖涔堝仛锛屼笉鐒朵細鎶ュ紓甯�
-     * @param loader
-     */
-    
+
+    //google实现的Multidex方案:进行dex注入 将Dex的Elements合并到PathClassLoader的Elemments 
     private static void inject(DexClassLoader loader, Context ctx){
         PathClassLoader pathLoader = (PathClassLoader) ctx.getClassLoader();
         
@@ -309,6 +282,9 @@ public class SecondaryDexEx {
             
             
             //获取nativeLibraryDirectories属性
+            
+            //由于libs下的so文件是释放在/data/app-lib/包名/目录下的，在这个路径我们无法写入插件dex使用的so，
+            //所以我们需要设置PathClassLoader的nativeLibraryDirectories成员来添加so的路径
             Field nativeLibraryDirectories = pathList.getClass().getDeclaredField("nativeLibraryDirectories");
             nativeLibraryDirectories.setAccessible(true);
             
