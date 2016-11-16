@@ -199,9 +199,9 @@ void CDecodePictureDlg::OnOpenEncrypt()
 	bi.pszDisplayName = szDir;       //用来暂存所选中的目录地址	
 	bi.lpszTitle = "请选择目录";        //提示对话框的功能	
 	bi.ulFlags = BIF_STATUSTEXT | BIF_RETURNONLYFSDIRS;//仅返回文件系统目录	
-	bi.lpfn = NULL;   //回调函数地址，可以为NULL	
-	bi.lParam = 0;    //回调函数的一个参数指针，可以为0	
-	bi.iImage = 0;   //与选中目录相关的图像
+	bi.lpfn = NULL;   
+	bi.lParam = 0;    
+	bi.iImage = 0;   
 	
 	pidl = SHBrowseForFolder(&bi);//调用显示选择对话框
 	
@@ -228,11 +228,12 @@ void CDecodePictureDlg::OnOpenDecrypt()
 	bi.pszDisplayName = szDir;       //用来暂存所选中的目录地址	
 	bi.lpszTitle = "请选择目录";        //提示对话框的功能	
 	bi.ulFlags = BIF_STATUSTEXT | BIF_RETURNONLYFSDIRS;//仅返回文件系统目录	
-	bi.lpfn = NULL;   //回调函数地址，可以为NULL	
-	bi.lParam = 0;    //回调函数的一个参数指针，可以为0	
-	bi.iImage = 0;   //与选中目录相关的图像
+	bi.lpfn = NULL;  	
+	bi.lParam = 0;   
+	bi.iImage = 0;  
 	
-	pidl = SHBrowseForFolder(&bi);//调用显示选择对话框
+	//目录选择对话框
+	pidl = SHBrowseForFolder(&bi);
 	
 	if(pidl == NULL) 
 		return;
