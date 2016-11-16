@@ -195,7 +195,7 @@ void CDecodePictureDlg::OnOpenEncrypt()
 	ITEMIDLIST *pidl;
 	
 	bi.hwndOwner = this->m_hWnd; //弹出对话框的句柄	
-	bi.pidlRoot = NULL;                    //浏览时的初始根目录，NULL为桌面目录	
+	bi.pidlRoot = NULL;                //浏览时的初始根目录，NULL为桌面目录	
 	bi.pszDisplayName = szDir;       //用来暂存所选中的目录地址	
 	bi.lpszTitle = "请选择目录";        //提示对话框的功能	
 	bi.ulFlags = BIF_STATUSTEXT | BIF_RETURNONLYFSDIRS;//仅返回文件系统目录	
@@ -203,7 +203,8 @@ void CDecodePictureDlg::OnOpenEncrypt()
 	bi.lParam = 0;    
 	bi.iImage = 0;   
 	
-	pidl = SHBrowseForFolder(&bi);//调用显示选择对话框
+	//打开目录选择保存对话框
+	pidl = SHBrowseForFolder(&bi);
 	
 	if(pidl == NULL) 
 		return;
