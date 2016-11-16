@@ -280,9 +280,13 @@ public class SecondaryDexEx {
             Object pathList = getPathList(pathLoader);
             setField(pathList, pathList.getClass(), "dexElements", dexElements);
             
-            
+            /*
+             * I/info    (28248): inject success pathList:
+             * DexPathList[[zip file "/data/app/com.example.multidexdemo-1.apk", dex file "dalvik.system.DexFile@41df5318"],
+             * nativeLibraryDirectories=[/data/app-lib/com.example.multidexdemo-1, /vendor/lib, /system/lib]]
+             */
+//            Log.d(TAG, "inject pathLoader is:"+pathLoader);
             //获取nativeLibraryDirectories属性
-            
             //由于libs下的so文件是释放在/data/app-lib/包名/目录下的，在这个路径我们无法写入插件dex使用的so，
             //所以我们需要设置PathClassLoader的nativeLibraryDirectories成员来添加so的路径
             Field nativeLibraryDirectories = pathList.getClass().getDeclaredField("nativeLibraryDirectories");
@@ -299,12 +303,7 @@ public class SecondaryDexEx {
             }
             nativeLibraryDirectories.set(pathList, filesss);
                       
-            /*
-             * I/info    (28248): inject success pathList:
-             * DexPathList[[zip file "/data/app/com.example.multidexdemo-1.apk", dex file "dalvik.system.DexFile@41df5318"],
-             * nativeLibraryDirectories=[/data/app-lib/com.example.multidexdemo-1, /vendor/lib, /system/lib]]
-             */
-//            Log.d(TAG, "inject pathLoader is:"+pathLoader);
+
             Log.i(TAG, "inject success pathList:" +pathList);
         } catch (Exception e) {
             Log.i(TAG, "inject dexclassloader error:" + Log.getStackTraceString(e));
