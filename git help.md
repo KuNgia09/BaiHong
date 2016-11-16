@@ -6,8 +6,10 @@
 
 - git remote -v 查看当前的远程仓库
 
+- git config --global credential.helper "store" 将用户名和密码保存
+
 - [为什么我用git gui pull总是失败](http://www.oschina.net/question/780536_121856)
 
 
 - FAQ:
-1.如果上传的代码没有README.md，而GitHub上勾选添加了README.md的话，这时需要执行git pull origin master和git push -u origin master才能将代码push
+    - 如果上传的代码没有README.md，而GitHub上勾选添加了README.md的话，这时需要执行git pull origin master和git push -u origin master才能将代码push
