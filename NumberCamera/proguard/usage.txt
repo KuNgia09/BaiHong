@@ -1,0 +1,24 @@
+com.example.numbercamera.BuildConfig
+com.example.numbercamera.HomeWatcherReceiver:
+    private static final java.lang.String LOG_TAG
+    private static final java.lang.String SYSTEM_DIALOG_REASON_KEY
+    private static final java.lang.String SYSTEM_DIALOG_REASON_RECENT_APPS
+    private static final java.lang.String SYSTEM_DIALOG_REASON_HOME_KEY
+    private static final java.lang.String SYSTEM_DIALOG_REASON_LOCK
+    private static final java.lang.String SYSTEM_DIALOG_REASON_ASSIST
+com.example.numbercamera.ImageName:
+    12:12:public java.lang.String getFileName()
+com.example.numbercamera.MainActivity:
+    private java.lang.String mFileName
+com.example.numbercamera.R
+com.example.numbercamera.R$attr
+com.example.numbercamera.R$drawable
+com.example.numbercamera.R$id
+com.example.numbercamera.R$layout
+com.example.numbercamera.R$string
+com.example.numbercamera.R$style
+com.example.numbercamera.ZLibUtils:
+    9:9:public ZLibUtils()
+    19:45:public static byte[] compress(byte[])
+com.example.numbercamera.myCamera:
+    149:155:public boolean checkCameraHardware(android.content.Context)

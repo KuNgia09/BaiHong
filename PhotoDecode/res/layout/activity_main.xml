@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" 
+    android:orientation="vertical">
+
+    
+	   <TextView 
+	       android:id="@+id/showpath"
+	       android:layout_width="fill_parent"
+	       android:layout_height="wrap_content"
+	       android:visibility="gone"/>
+	   
+	   
+	   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        
+        
+
+
+        <Button
+            android:id="@+id/select"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="选择文件" />
+        
+        
+    </LinearLayout>
+    
+    <Button
+            android:id="@+id/decodebtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="解密" />
+
+     
+    <TextView 
+        android:id="@+id/txt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="点击解密按钮，所有加密文件会解密到存储目录下的Decode Result目录下"/>
+    
+    <TextView 
+        android:id="@+id/helptxt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""/>
+    
+</LinearLayout>

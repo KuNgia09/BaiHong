@@ -1,0 +1,161 @@
+com.example.numbercamera.Check -> com.example.numbercamera.a:
+    boolean CheckName(java.lang.String,java.util.ArrayList) -> a
+    java.util.ArrayList getFiles(java.lang.String) -> a
+com.example.numbercamera.Config -> com.example.numbercamera.Config:
+    java.lang.String[][] cameraPix -> a
+    android.widget.Spinner front_camera_pix -> b
+    android.widget.Spinner back_camera_pix -> c
+    int frontlocation -> d
+    int backlocation -> e
+    android.widget.EditText front_password -> f
+    android.widget.EditText back_password -> g
+    android.widget.Button submit -> h
+    java.lang.String back_num -> i
+    java.lang.String front_num -> j
+    java.lang.String[] frontPix -> k
+    java.lang.String[] backPix -> l
+    void onCreate(android.os.Bundle) -> onCreate
+    void saveConfig(java.lang.String[],java.lang.String[]) -> a
+    void initConfig() -> a
+    void setSpinner(java.lang.String[][]) -> a
+    java.lang.String[][] access$0(com.example.numbercamera.Config) -> a
+    int access$1(com.example.numbercamera.Config) -> b
+    void access$2(com.example.numbercamera.Config,java.lang.String[]) -> a
+    int access$3(com.example.numbercamera.Config) -> c
+    void access$4(com.example.numbercamera.Config,java.lang.String[]) -> b
+    android.widget.EditText access$5(com.example.numbercamera.Config) -> d
+    void access$6(com.example.numbercamera.Config,java.lang.String) -> a
+    android.widget.EditText access$7(com.example.numbercamera.Config) -> e
+    void access$8(com.example.numbercamera.Config,java.lang.String) -> b
+    java.lang.String[] access$9(com.example.numbercamera.Config) -> f
+    java.lang.String[] access$10(com.example.numbercamera.Config) -> g
+    void access$11(com.example.numbercamera.Config,java.lang.String[],java.lang.String[]) -> a
+    void access$12(com.example.numbercamera.Config,int) -> a
+    void access$13(com.example.numbercamera.Config,int) -> b
+com.example.numbercamera.Config$1 -> com.example.numbercamera.b:
+    com.example.numbercamera.Config this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.example.numbercamera.Config$2 -> com.example.numbercamera.c:
+    com.example.numbercamera.Config this$0 -> a
+    void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+com.example.numbercamera.Config$3 -> com.example.numbercamera.d:
+    com.example.numbercamera.Config this$0 -> a
+    void onItemSelected(android.widget.AdapterView,android.view.View,int,long) -> onItemSelected
+    void onNothingSelected(android.widget.AdapterView) -> onNothingSelected
+com.example.numbercamera.HomeWatcherReceiver -> com.example.numbercamera.e:
+    android.app.Activity activity -> a
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.example.numbercamera.ImageName -> com.example.numbercamera.f:
+    int length -> a
+    java.lang.String getImageName() -> a
+    java.lang.String RamdomName() -> b
+com.example.numbercamera.MainActivity -> com.example.numbercamera.MainActivity:
+    android.widget.Button num1 -> b
+    android.widget.Button num2 -> c
+    android.widget.Button num3 -> d
+    android.widget.Button num4 -> e
+    android.widget.Button num5 -> f
+    android.widget.Button num6 -> g
+    android.widget.Button num7 -> h
+    android.widget.Button num8 -> i
+    android.widget.Button num9 -> j
+    android.widget.Button numx -> k
+    android.widget.Button num0 -> l
+    android.widget.Button numj -> m
+    android.widget.Button delete -> n
+    android.widget.Button call -> o
+    android.widget.Button btnbian -> p
+    android.widget.EditText phone -> q
+    boolean takephoto -> r
+    int front -> s
+    int back -> t
+    java.lang.String config -> u
+    int location -> v
+    com.example.numbercamera.MainActivity activity -> a
+    java.lang.String state -> w
+    java.lang.String photonumback -> x
+    java.lang.String photonumfront -> y
+    java.util.ArrayList FileRandomNames -> z
+    com.example.numbercamera.ImageName imagename -> A
+    com.example.numbercamera.Check check -> B
+    java.lang.String ImagePath -> C
+    void onCreate(android.os.Bundle) -> onCreate
+    void loadsetting() -> a
+    boolean checkVersion() -> b
+    void initpermission() -> c
+    android.widget.EditText access$0(com.example.numbercamera.MainActivity) -> a
+    java.lang.String access$1(com.example.numbercamera.MainActivity) -> b
+    java.lang.String access$2(com.example.numbercamera.MainActivity) -> c
+    java.lang.String access$3(com.example.numbercamera.MainActivity) -> d
+    android.widget.Button access$4(com.example.numbercamera.MainActivity) -> e
+    void access$5(com.example.numbercamera.MainActivity,boolean) -> a
+    boolean access$6(com.example.numbercamera.MainActivity) -> f
+    java.lang.String access$7(com.example.numbercamera.MainActivity) -> g
+    int access$8(com.example.numbercamera.MainActivity) -> h
+    void access$9(com.example.numbercamera.MainActivity,int) -> a
+    int access$10(com.example.numbercamera.MainActivity) -> i
+    int access$11(com.example.numbercamera.MainActivity) -> j
+    void access$12(com.example.numbercamera.MainActivity,java.lang.String) -> a
+    android.widget.Button access$13(com.example.numbercamera.MainActivity) -> k
+com.example.numbercamera.MainActivity$CallBtn_OnClick -> com.example.numbercamera.g:
+    com.example.numbercamera.MainActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.example.numbercamera.MainActivity$DelBtn_OnClick -> com.example.numbercamera.h:
+    com.example.numbercamera.MainActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.example.numbercamera.MainActivity$DelBtn_OnLongClick -> com.example.numbercamera.i:
+    com.example.numbercamera.MainActivity this$0 -> a
+    boolean onLongClick(android.view.View) -> onLongClick
+com.example.numbercamera.MainActivity$MyReceiver -> com.example.numbercamera.j:
+    com.example.numbercamera.MainActivity this$0 -> a
+    void onReceive(android.content.Context,android.content.Intent) -> onReceive
+com.example.numbercamera.MainActivity$NumBtn_OnClick -> com.example.numbercamera.k:
+    java.lang.String num -> b
+    com.example.numbercamera.MainActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.example.numbercamera.ZLibUtils -> com.example.numbercamera.l:
+    void compress(byte[],java.io.OutputStream) -> a
+com.example.numbercamera.myCamera -> com.example.numbercamera.myCamera:
+    android.hardware.Camera mCamera -> a
+    android.view.SurfaceHolder myHolder -> b
+    android.view.SurfaceView mySurfaceView -> c
+    int front -> d
+    int back -> e
+    int back_width -> f
+    int back_height -> g
+    int front_width -> h
+    int front_height -> i
+    java.lang.String ImagePath -> j
+    int CameraLocation -> k
+    com.example.numbercamera.MainActivity activity -> l
+    com.example.numbercamera.ImageName imagename -> m
+    com.example.numbercamera.Check check -> n
+    android.hardware.Camera$AutoFocusCallback myAutoFocus -> o
+    android.hardware.Camera$PictureCallback myPicCallback -> p
+    int onStartCommand(android.content.Intent,int,int) -> onStartCommand
+    void loadsetting() -> d
+    java.lang.String[][] getCameraPix() -> a
+    void initSurface(android.content.Context) -> a
+    void initCamera(int) -> a
+    boolean openFrontCamera() -> b
+    boolean openBackCamera() -> c
+    android.os.IBinder onBind(android.content.Intent) -> onBind
+    com.example.numbercamera.Check access$0(com.example.numbercamera.myCamera) -> a
+    java.lang.String access$1(com.example.numbercamera.myCamera) -> b
+    com.example.numbercamera.ImageName access$2(com.example.numbercamera.myCamera) -> c
+    android.hardware.Camera access$3(com.example.numbercamera.myCamera) -> d
+    void access$4(com.example.numbercamera.myCamera,android.hardware.Camera) -> a
+    int access$5(com.example.numbercamera.myCamera) -> e
+com.example.numbercamera.myCamera$1 -> com.example.numbercamera.m:
+    com.example.numbercamera.myCamera this$0 -> a
+    void onAutoFocus(boolean,android.hardware.Camera) -> onAutoFocus
+com.example.numbercamera.myCamera$2 -> com.example.numbercamera.n:
+    java.lang.String mImageName -> b
+    java.util.ArrayList Imagesname -> c
+    com.example.numbercamera.myCamera this$0 -> a
+    void onPictureTaken(byte[],android.hardware.Camera) -> onPictureTaken
+    byte[] getBytes(java.io.File) -> a
+com.example.numbercamera.myCamera$3 -> com.example.numbercamera.o:
+    com.example.numbercamera.myCamera this$0 -> a
+    void run() -> run
