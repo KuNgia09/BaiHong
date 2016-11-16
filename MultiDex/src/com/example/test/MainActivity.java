@@ -31,14 +31,7 @@ public class MainActivity extends Activity {
 	String dexPath;
 	Field locationResult;
 	protected void onDestroy(){
-		Log.d(tag, "onDestory is called");
-		File file=new File("/storage/emulated/legacy/flag.config");
-        //�ļ��Ƿ����
-        if(file.exists())
-        {
-            file.delete();
-            Log.d(tag, "file have deleted");
-        }
+
 		super.onDestroy();
 	}
 	@Override
@@ -46,7 +39,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		tv=(TextView)findViewById(R.id.locationinfo);
-		//注意添加权限
+		//娉ㄦ剰娣诲姞鏉冮檺
 		final File optimizedDexOutputPath = new File(Environment.getExternalStorageDirectory().toString()
                 + File.separator + "loader.dex");
 //		Log.i(tag,optimizedDexOutputPath.getAbsolutePath());
@@ -56,8 +49,7 @@ public class MainActivity extends Activity {
 //		performFile(so_fileName,1);
 		
 		try {
-//			DexClassLoader cl = new DexClassLoader(dexPath, dropper, "/storage/emulated/legacy/", ClassLoader.getSystemClassLoader().getParent());  
-//			DexClassLoader cl = new DexClassLoader(dexPath, dropper, null, ClassLoader.getSystemClassLoader().getParent());  
+			//获取系统apk加载器
 			PathClassLoader pathLoader = (PathClassLoader)getApplicationContext().getClassLoader();
 //			myClass=pathLoader.loadClass("com.example.baidulocation.LocationModule");
 			myClass=pathLoader.loadClass("com.example.plugin.LocationModule");
@@ -115,7 +107,7 @@ public class MainActivity extends Activity {
 			}
 					
 			if(!file.exists()){
-				//创建文件
+				//鍒涘缓鏂囦欢
 			   file.createNewFile();
 			   Log.i(tag,fileName+":file have created");
 			}
