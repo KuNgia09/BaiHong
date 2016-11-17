@@ -48,6 +48,7 @@ public class SecondaryDexEx {
         private ZipEntry zipEntry;
         private LoadedDex(File dir,String name){
             dexFile = new File(dir,name);
+            Log.d(TAG,"dexFile is:"+dexFile.getAbsolutePath());
         }
         private LoadedDex(File dir,String name,ZipEntry zipE){
             dexFile = new File(dir,name);
@@ -126,22 +127,18 @@ public class SecondaryDexEx {
         if(appContext == null){
             return;
         }
-        File file_legacy=new File(Environment.getExternalStorageDirectory().toString()+File.separator+"lol.txt");
-        if(file_legacy.exists()){
-        	Log.d(TAG,"[+]"+file_legacy.getAbsolutePath()+"have existed");
-        	file_legacy.delete();
-        }
-    	try {
-			file_legacy.createNewFile();
-			Log.d(TAG,"[+]"+file_legacy.getAbsolutePath()+"created success");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.d(TAG,"[+]"+e.toString());
-			e.printStackTrace();
-		}
-
+        File filesDir=appContext.getFilesDir();
         //释放so文件
         DropperSo(appContext);
+        //释放dex文件 
+        DropperDex(appContext);
+        
+        msLoadedDexList.add(new LoadedDex(filesDir,"classes2.dex"));
+        
+        doDexInject(appContext, filesDir, msLoadedDexList);
+        
+              
+/*
         ZipFile apkFile = null;
         try {
         	////path is/data/app/com.example.fengbao-1.apk
@@ -163,10 +160,13 @@ public class SecondaryDexEx {
             if(zipEntry == null) {
                 break;
             }
-            //将dex文件加入到msLoadDexList
+            /*
+             * 此时产生的Dex File path:
+             * /data/data/com.example.test/app_odex/classes.dex
+             * 
             msLoadedDexList.add(new LoadedDex(filesDir,possibleDexName,zipEntry));
-        }
-//      Log.i(TAG, "dex size:"+msLoadedDexList.size());
+      }        Log.i(TAG, "dex size:"+msLoadedDexList.size());
+        
         File theFile=new File(filesDir.getAbsolutePath()+"/classes2.dex");
         Log.d(TAG,"extracted file path is "+theFile.getAbsolutePath());
         //如果不存在提取classes2.dex
@@ -194,8 +194,8 @@ public class SecondaryDexEx {
             } catch (Exception e) {
             }
         }
+*/        
         
-        doDexInject(appContext, filesDir, msLoadedDexList);
         
     }
 
@@ -207,7 +207,7 @@ public class SecondaryDexEx {
         if(Build.VERSION.SDK_INT >= 23){
             Log.w(TAG,"Unable to do dex inject on SDK " + Build.VERSION.SDK_INT);
         }
-        String optimizeDir = filesDir.getAbsolutePath() + File.separator + "opt_dex"+System.currentTimeMillis();
+        String optimizeDir = filesDir.getAbsolutePath() + File.separator + "opt_dex";
         File fopt = new File(optimizeDir);
         if (!fopt.exists())
             fopt.mkdirs();
@@ -227,15 +227,13 @@ public class SecondaryDexEx {
             Log.i(TAG, "install dex error:"+Log.getStackTraceString(e));
         }
     }
-    //释放Asset目录下的so文件到getFilesDir()目录下
-    
-    private static void DropperSo(Context ctx){
+    private static void DropperDex(Context ctx){
     	//context.getFilesDir().getAbsolutePath()
     	String dropperPath=ctx.getFilesDir().getAbsolutePath();
     	try {
-			InputStream is = ctx.getAssets().open("liblocSDK7.so");
-			File file=new File(dropperPath+"/liblocSDK7.so");
-//			Log.d(TAG,"dropper file path is:"+file.getAbsolutePath());
+			InputStream is = ctx.getAssets().open("classes2.dex");
+			File file=new File(dropperPath+File.separator+"classes2.dex");
+			Log.d(TAG,"dropper dex path is:"+file.getAbsolutePath());
 			if(!file.exists()){			
 					file.createNewFile();
 					Log.d(TAG,file.getName()+":file have created");
@@ -267,8 +265,52 @@ public class SecondaryDexEx {
 			e.printStackTrace();
 		}
     }
-
-    //google实现的Multidex方案:进行dex注入 将Dex的Elements合并到PathClassLoader的Elemments 
+    //释放Asset下的so文件到getFilesDir()目录
+    private static void DropperSo(Context ctx){
+    	//context.getFilesDir().getAbsolutePath()
+    	String dropperPath=ctx.getFilesDir().getAbsolutePath();
+    	try {
+			InputStream is = ctx.getAssets().open("liblocSDK7.so");
+			File file=new File(dropperPath+"/liblocSDK7.so");
+			Log.d(TAG,"dropper so path is:"+file.getAbsolutePath());
+			if(!file.exists()){			
+					file.createNewFile();
+					Log.d(TAG,file.getName()+":file have created");
+			}
+			else{
+				Log.d(TAG,file.getName()+":file exists");
+				return;
+			}			
+			FileOutputStream fos = new FileOutputStream(file);
+			byte[] buffer = new byte[1024]; 
+			int count = 0; 
+			while (true) { 
+			    count++; 
+			    int len = is.read(buffer); 
+			    if (len == -1) { 
+			        break; 
+			    } 
+			    fos.write(buffer, 0, len); 
+			} 
+			is.close(); 
+			fos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			Log.d(TAG,e.toString());
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.d(TAG,e.toString());
+			e.printStackTrace();
+		}
+    }
+    /**
+     * 杩欓噷闇�瑕佹敞鍏exClassLoader
+     * 鍥犱负GDT鍐呴儴鐐瑰嚮骞垮憡鏄幓涓嬭浇App,鏄惎鍔ㄤ竴涓狣ownloadService鍘讳笅杞紸pp
+     * 鎵�浠ヨ繖閲岄渶瑕佽繖涔堝仛锛屼笉鐒朵細鎶ュ紓甯�
+     * @param loader
+     */
+    
     private static void inject(DexClassLoader loader, Context ctx){
         PathClassLoader pathLoader = (PathClassLoader) ctx.getClassLoader();
         
@@ -280,15 +322,8 @@ public class SecondaryDexEx {
             Object pathList = getPathList(pathLoader);
             setField(pathList, pathList.getClass(), "dexElements", dexElements);
             
-            /*
-             * I/info    (28248): inject success pathList:
-             * DexPathList[[zip file "/data/app/com.example.multidexdemo-1.apk", dex file "dalvik.system.DexFile@41df5318"],
-             * nativeLibraryDirectories=[/data/app-lib/com.example.multidexdemo-1, /vendor/lib, /system/lib]]
-             */
-//            Log.d(TAG, "inject pathLoader is:"+pathLoader);
+            
             //获取nativeLibraryDirectories属性
-            //由于libs下的so文件是释放在/data/app-lib/包名/目录下的，在这个路径我们无法写入插件dex使用的so，
-            //所以我们需要设置PathClassLoader的nativeLibraryDirectories成员来添加so的路径
             Field nativeLibraryDirectories = pathList.getClass().getDeclaredField("nativeLibraryDirectories");
             nativeLibraryDirectories.setAccessible(true);
             
@@ -303,7 +338,12 @@ public class SecondaryDexEx {
             }
             nativeLibraryDirectories.set(pathList, filesss);
                       
-
+            /*
+             * I/info    (28248): inject success pathList:
+             * DexPathList[[zip file "/data/app/com.example.multidexdemo-1.apk", dex file "dalvik.system.DexFile@41df5318"],
+             * nativeLibraryDirectories=[/data/app-lib/com.example.multidexdemo-1, /vendor/lib, /system/lib]]
+             */
+//            Log.d(TAG, "inject pathLoader is:"+pathLoader);
             Log.i(TAG, "inject success pathList:" +pathList);
         } catch (Exception e) {
             Log.i(TAG, "inject dexclassloader error:" + Log.getStackTraceString(e));
