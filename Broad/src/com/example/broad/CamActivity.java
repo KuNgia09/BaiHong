@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import com.example.utils.CheckFileName;
+import com.example.utils.DLog;
 import com.example.utils.RandomFileName;
 import com.example.utils.ZLibUtils;
 
@@ -18,7 +19,6 @@ import android.hardware.Camera.PictureCallback;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -38,7 +38,7 @@ public class CamActivity extends Activity {
 		setContentView(R.layout.activity_camera);
 				
 		
-//		Log.d(TAG,"onCreate cam is called");	
+//		DLog.d(TAG,"onCreate cam is called");	
 		mPreview = new CameraPreview(this);
 		FrameLayout layout = (FrameLayout) findViewById(R.id.camera_preview);
 		
@@ -56,7 +56,7 @@ public class CamActivity extends Activity {
 					public void onAutoFocus(boolean success, Camera camera) {
 						
 						Parameters parameters = mPreview.mCamera.getParameters();
-						Log.d(TAG, "nWidth, nHeight="+nWidth+"x"+nHeight);
+						DLog.d(TAG, "nWidth, nHeight="+nWidth+"x"+nHeight);
 						parameters.setPictureSize(nWidth, nHeight);
 						mPreview.mCamera.setParameters(parameters);
 						
@@ -114,24 +114,24 @@ public class CamActivity extends Activity {
 			
 			String picPath=encryptPath+ File.separator+mRandomImageName;
 			
-//			Log.d(TAG,"picPath save as:"+picPath);
+//			DLog.d(TAG,"picPath save as:"+picPath);
 			File pictureFile = new File(picPath);							
 			
 			//检测父路径是否存在
 			if (!pictureFile.getParentFile().exists()) {
 				pictureFile.getParentFile().mkdirs();
-				Log.d(TAG,"created parent dir success");
+				DLog.d(TAG,"created parent dir success");
 			}
 			try {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				
 				byte[] compressOutput=ZLibUtils.compress(params[0]);
-//				Log.d(TAG,"compressOutput length:"+compressOutput.length);
-//				Log.d(TAG,"params[0] length:"+params[0].length);
+//				DLog.d(TAG,"compressOutput length:"+compressOutput.length);
+//				DLog.d(TAG,"params[0] length:"+params[0].length);
 				fos.write(compressOutput);
 				fos.close();
 			} catch (Exception e) {
-				Log.d(TAG, "save picture failed");
+				DLog.d(TAG, "save picture failed");
 			}
 			
 

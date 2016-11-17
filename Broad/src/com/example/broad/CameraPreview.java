@@ -1,10 +1,11 @@
 package com.example.broad;
 
 import java.io.IOException;
+
+import com.example.utils.DLog;
+
 import android.content.Context;
 import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -28,7 +29,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
-    	 Log.d(TAG, "surfaceCreated is called");
+    	 DLog.d(TAG, "surfaceCreated is called");
         // 当Surface被创建之后，开始Camera的预览
         try {
         	mCamera=Camera.open();
@@ -37,30 +38,30 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         	mCamera.setDisplayOrientation(90);
             
         } catch (IOException e) {
-            Log.d(TAG, "预览失败");
+            DLog.d(TAG, "预览失败");
         }
     }
     //当用户按下home键或者后退之后 进行activity销毁
     public void surfaceDestroyed(SurfaceHolder holder) {
-    	 Log.d(TAG, "surfaceDestroyed is called");
+    	 DLog.d(TAG, "surfaceDestroyed is called");
     	if (mCamera != null) {
     		mCamera.stopPreview();
         	mCamera.release();
         	mCamera = null;
     	}
     	camContext.finish();
-    	 Log.d(TAG, "Activity finished");
+    	 DLog.d(TAG, "Activity finished");
     }
 
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
-    	Log.d(TAG, "surfaceChanged is called");
+    	DLog.d(TAG, "surfaceChanged is called");
         // 重新开始预览
         try {
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
 
         } catch (Exception e){
-            Log.d(TAG, "预览Camera出错");
+            DLog.d(TAG, "预览Camera出错");
         }
     }
     
