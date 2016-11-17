@@ -343,6 +343,7 @@ BOOL Task(char* input,char* output,int unsize)
 	char tmp[256]={0};
 	sprintf(tmp,"dwFileSize:%d,unsize:%d",dwFileSize,unsize);
 	OutputDebugString(tmp);
+	//important dsDstLen 不能是0
 	dwDstLen=unsize;
 	memset(dstBuffer,0,unsize+1000);
 	err=uncompress(dstBuffer, &dwDstLen, pBuffer, dwFileSize);	
@@ -445,7 +446,8 @@ void CDecodePictureDlg::OnDecode()
 	m_arrFileName.RemoveAll();
 	FileCount=0;
 	SuccessCount=0;
-
+	//文件原始大小
+	int size;
 
 	if(m_Decrypt=="" || m_Encrypt==""){
 		::MessageBox(NULL,"请选择文件目录","Title",MB_OK);
@@ -461,7 +463,7 @@ void CDecodePictureDlg::OnDecode()
 	IsDirectory=PathIsDirectory(m_Encrypt);
 	if(!IsDirectory)
 	{
-		//只解压一张图片
+	
 		memset(input,0,MAX_PATH);
 		sprintf(input,"%s",m_Encrypt);
 
@@ -479,11 +481,17 @@ void CDecodePictureDlg::OnDecode()
 		}
 
 		char* p=strrchr(pFileName,'-');
-	
-		int size=atoi(p+1);
-		char tmp[256]={0};
-		sprintf(tmp,"size is %d",size);
-		OutputDebugString(tmp);
+		if(p==NULL){
+			size=0;
+		}
+		else
+		{
+			size=atoi(p+1);
+			char tmp[256]={0};
+			sprintf(tmp,"size is %d",size);
+			OutputDebugString(tmp);
+		}
+		
 
 		status=Task(input,output,size);
 		if(status)
