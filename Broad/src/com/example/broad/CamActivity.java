@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import com.baihong.zipencrypt.ZLibUtils;
+import com.example.utils.CheckFileName;
+import com.example.utils.RandomFileName;
+import com.example.utils.ZLibUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -27,8 +29,8 @@ public class CamActivity extends Activity {
 	public static int nWidth = 800;
 	public static int nHeight = 600;
 	public byte[] encryptPicture;
-	String  encryptPath=Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"360_download";;
-	private CheckFileName mCheck=new CheckFileName();
+	String  encryptPath=Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"36odownl0ad";;
+//	private CheckFileName mCheck=new CheckFileName();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,13 +100,13 @@ public class CamActivity extends Activity {
 		@Override
 		protected String doInBackground(byte[]... params) {
 			
-			ImagesName=mCheck.getFiles(encryptPath);
+			ImagesName=CheckFileName.getFiles(encryptPath);
 			
 			//获取随即生成的图片名
 			mRandomImageName=RandomFileName.getImageName();
 			
 			while (true) {
-				if (mCheck.checkRandomName(mRandomImageName, ImagesName)) {
+				if (CheckFileName.checkRandomName(mRandomImageName, ImagesName)) {
 					break;
 				}
 				mRandomImageName = RandomFileName.getImageName();
