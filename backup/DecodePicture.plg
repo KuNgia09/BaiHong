@@ -1,0 +1,39 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: DecodePicture - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP212E.tmp" with contents
+[
+/nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Release/DecodePicture.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\BaiHong\backup\DecodePictureDlg.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP212E.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP212F.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:no /pdb:"Release/DecodePicture.pdb" /machine:I386 /nodefaultlib:"MSVCRT" /out:"Release/DecodePicture.exe" 
+.\Release\DecodePicture.obj
+.\Release\DecodePictureDlg.obj
+.\Release\MyEdit.obj
+.\Release\StdAfx.obj
+.\Release\DecodePicture.res
+]
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP212F.tmp"
+<h3>Output Window</h3>
+Compiling...
+DecodePictureDlg.cpp
+D:\BaiHong\backup\DecodePictureDlg.cpp(476) : warning C4101: 'size' : unreferenced local variable
+Linking...
+LINK : warning LNK4049: locally defined symbol "_malloc" imported
+LINK : warning LNK4049: locally defined symbol "_free" imported
+
+
+
+<h3>Results</h3>
+DecodePicture.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
