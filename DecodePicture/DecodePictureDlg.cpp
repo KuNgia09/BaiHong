@@ -287,7 +287,7 @@ void  CDecodePictureDlg::EnumMyFile(CString szFolderPath)
 	return ;
 }
 
-BOOL Task(char* input,char* output)
+BOOL Task(char* input,char* output,int unsize)
 {
 	char* szFilePath;
 	HANDLE hFile;
@@ -324,17 +324,11 @@ BOOL Task(char* input,char* output)
 	}
 	
 	dwFileSize=GetFileSize(hFile,&dwHighSize);
-	//10M的大小图片
-	if(dwFileSize>10485760)
-	{
-		CloseHandle(hFile);
-		return Flag;
-	}
+
 	//	OutputDebugString("dwFileSize:%d\n",dwFileSize);
 	pBuffer=(unsigned char*)malloc(dwFileSize);
 	ReadFile(hFile,pBuffer,dwFileSize,&dwActual,0);
 	
-
 	hUnCompressedFile=CreateFile(szUnCompressedPath,
 		GENERIC_READ|GENERIC_WRITE|DELETE,
 		FILE_SHARE_READ,
@@ -345,8 +339,12 @@ BOOL Task(char* input,char* output)
 		return Flag;
 	}
 	
-	dstBuffer=(unsigned char*)malloc(8*dwFileSize);
-	memset(dstBuffer,0,8*dwFileSize);
+	dstBuffer=(unsigned char*)malloc(unsize+1000);
+	char tmp[256]={0};
+	sprintf(tmp,"dwFileSize:%d,unsize:%d",dwFileSize,unsize);
+	OutputDebugString(tmp);
+	dwDstLen=unsize;
+	memset(dstBuffer,0,unsize+1000);
 	err=uncompress(dstBuffer, &dwDstLen, pBuffer, dwFileSize);	
 	
 	switch(err){
@@ -422,7 +420,13 @@ void CDecodePictureDlg::EnumUncompress()
 
 //		OutputDebugString(output);
 		OutputDebugString(input);
-		BOOL status=Task(input,output);
+		char* pFileName=FileName.GetBuffer(FileName.GetLength());
+		char* p=strrchr(pFileName,'-');
+		int size=atoi(p+1);
+		char tmp[256]={0};
+		sprintf(tmp,"size is %d",size);
+		OutputDebugString(tmp);
+		BOOL status=Task(input,output,size);
 		if(status==TRUE)
 			SuccessCount++;
 		
@@ -473,7 +477,15 @@ void CDecodePictureDlg::OnDecode()
 		{
 			sprintf(output,"%s\\decrypt_%s.jpg",m_Decrypt,pFileName);
 		}
-		status=Task(input,output);
+
+		char* p=strrchr(pFileName,'-');
+	
+		int size=atoi(p+1);
+		char tmp[256]={0};
+		sprintf(tmp,"size is %d",size);
+		OutputDebugString(tmp);
+
+		status=Task(input,output,size);
 		if(status)
 			AfxMessageBox("解密成功",MB_OK);
 		else
