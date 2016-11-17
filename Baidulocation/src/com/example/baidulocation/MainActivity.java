@@ -19,7 +19,7 @@ import com.baidu.location.Poi;
 public class MainActivity extends Activity {
 
     private Button startService;  
-    private String TAG="MyService";
+    private String TAG="info";
     private Button stopService;  
     private TextView locationResult;
 
@@ -34,10 +34,10 @@ public class MainActivity extends Activity {
         stopService = (Button) findViewById(R.id.stop_service);  
         locationResult=(TextView)findViewById(R.id.locationresult); 
         
-        mLocationClient = new LocationClient(getApplicationContext());     //ÉùÃ÷LocationClientÀà
-        mLocationClient.registerLocationListener(myListener);    //×¢²á¼àÌıº¯Êı
+        mLocationClient = new LocationClient(getApplicationContext());    
+        mLocationClient.registerLocationListener(myListener);    
         initLocation();
-        mLocationClient.start();// ¿ªÊ¼¶¨Î»
+        mLocationClient.start();
 	}
 
 	public void startLocation(View v){
@@ -54,18 +54,18 @@ public class MainActivity extends Activity {
 
 	private void initLocation(){
 	        LocationClientOption option = new LocationClientOption();
-	        option.setLocationMode(LocationMode.Hight_Accuracy);//¿ÉÑ¡£¬Ä¬ÈÏ¸ß¾«¶È£¬ÉèÖÃ¶¨Î»Ä£Ê½£¬¸ß¾«¶È£¬µÍ¹¦ºÄ£¬½öÉè±¸
-	        option.setCoorType("bd09ll");//¿ÉÑ¡£¬Ä¬ÈÏgcj02£¬ÉèÖÃ·µ»ØµÄ¶¨Î»½á¹û×ø±êÏµ
+	        option.setLocationMode(LocationMode.Hight_Accuracy);
+	        option.setCoorType("bd09ll");
 	        int span=1000;
-	        option.setScanSpan(span);//¿ÉÑ¡£¬Ä¬ÈÏ0£¬¼´½ö¶¨Î»Ò»´Î£¬ÉèÖÃ·¢Æğ¶¨Î»ÇëÇóµÄ¼ä¸ôĞèÒª´óÓÚµÈÓÚ1000ms²ÅÊÇÓĞĞ§µÄ
-	        option.setIsNeedAddress(true);//¿ÉÑ¡£¬ÉèÖÃÊÇ·ñĞèÒªµØÖ·ĞÅÏ¢£¬Ä¬ÈÏ²»ĞèÒª
-	        option.setOpenGps(true);//¿ÉÑ¡£¬Ä¬ÈÏfalse,ÉèÖÃÊÇ·ñÊ¹ÓÃgps
-	        option.setLocationNotify(true);//¿ÉÑ¡£¬Ä¬ÈÏfalse£¬ÉèÖÃÊÇ·ñµ±GPSÓĞĞ§Ê±°´ÕÕ1S/1´ÎÆµÂÊÊä³öGPS½á¹û
-	        option.setIsNeedLocationDescribe(true);//¿ÉÑ¡£¬Ä¬ÈÏfalse£¬ÉèÖÃÊÇ·ñĞèÒªÎ»ÖÃÓïÒå»¯½á¹û£¬¿ÉÒÔÔÚBDLocation.getLocationDescribeÀïµÃµ½£¬½á¹ûÀàËÆÓÚ¡°ÔÚ±±¾©Ìì°²ÃÅ¸½½ü¡±
-	        option.setIsNeedLocationPoiList(true);//¿ÉÑ¡£¬Ä¬ÈÏfalse£¬ÉèÖÃÊÇ·ñĞèÒªPOI½á¹û£¬¿ÉÒÔÔÚBDLocation.getPoiListÀïµÃµ½
-	        option.setIgnoreKillProcess(false);//¿ÉÑ¡£¬Ä¬ÈÏtrue£¬¶¨Î»SDKÄÚ²¿ÊÇÒ»¸öSERVICE£¬²¢·Åµ½ÁË¶ÀÁ¢½ø³Ì£¬ÉèÖÃÊÇ·ñÔÚstopµÄÊ±ºòÉ±ËÀÕâ¸ö½ø³Ì£¬Ä¬ÈÏ²»É±ËÀ  
-	        option.SetIgnoreCacheException(false);//¿ÉÑ¡£¬Ä¬ÈÏfalse£¬ÉèÖÃÊÇ·ñÊÕ¼¯CRASHĞÅÏ¢£¬Ä¬ÈÏÊÕ¼¯
-	        option.setEnableSimulateGps(false);//¿ÉÑ¡£¬Ä¬ÈÏfalse£¬ÉèÖÃÊÇ·ñĞèÒª¹ıÂËGPS·ÂÕæ½á¹û£¬Ä¬ÈÏĞèÒª
+	        option.setScanSpan(span);
+	        option.setIsNeedAddress(true);
+	        option.setOpenGps(true);
+	        option.setLocationNotify(true);
+	        option.setIsNeedLocationDescribe(true);
+	        option.setIsNeedLocationPoiList(true);
+	        option.setIgnoreKillProcess(false);  
+	        option.SetIgnoreCacheException(false);
+	        option.setEnableSimulateGps(false);
 	        mLocationClient.setLocOption(option);
     }
 	public class MyLocationListener implements BDLocationListener {
@@ -73,6 +73,7 @@ public class MainActivity extends Activity {
         @Override
         public void onReceiveLocation(BDLocation location) {
             //Receive Location
+        	
             StringBuffer sb = new StringBuffer(256);
             sb.append("time : ");
             sb.append(location.getTime());
@@ -84,44 +85,44 @@ public class MainActivity extends Activity {
             sb.append(location.getLongitude());
             sb.append("\nradius : ");
             sb.append(location.getRadius());
-            if (location.getLocType() == BDLocation.TypeGpsLocation){// GPS¶¨Î»½á¹û
+            if (location.getLocType() == BDLocation.TypeGpsLocation){// GPSï¿½ï¿½Î»ï¿½ï¿½ï¿½
                 sb.append("\nspeed : ");
-                sb.append(location.getSpeed());// µ¥Î»£º¹«ÀïÃ¿Ğ¡Ê±
+                sb.append(location.getSpeed());
                 sb.append("\nsatellite : ");
                 sb.append(location.getSatelliteNumber());
                 sb.append("\nheight : ");
-                sb.append(location.getAltitude());// µ¥Î»£ºÃ×
+                sb.append(location.getAltitude());
                 sb.append("\ndirection : ");
-                sb.append(location.getDirection());// µ¥Î»¶È
+                sb.append(location.getDirection());
                 sb.append("\naddr : ");
                 sb.append(location.getAddrStr());
                 sb.append("\ndescribe : ");
-                sb.append("gps¶¨Î»³É¹¦");
+                sb.append("gpsï¿½ï¿½Î»ï¿½É¹ï¿½");
  
-            } else if (location.getLocType() == BDLocation.TypeNetWorkLocation){// ÍøÂç¶¨Î»½á¹û
+            } else if (location.getLocType() == BDLocation.TypeNetWorkLocation){
                 sb.append("\naddr : ");
                 sb.append(location.getAddrStr());
-                //ÔËÓªÉÌĞÅÏ¢
+               
                 sb.append("\noperationers : ");
                 sb.append(location.getOperators());
                 sb.append("\ndescribe : ");
-                sb.append("ÍøÂç¶¨Î»³É¹¦");
-            } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {// ÀëÏß¶¨Î»½á¹û
+                sb.append("ï¿½ï¿½ï¿½ç¶¨Î»ï¿½É¹ï¿½");
+            } else if (location.getLocType() == BDLocation.TypeOffLineLocation) {
                 sb.append("\ndescribe : ");
-                sb.append("ÀëÏß¶¨Î»³É¹¦£¬ÀëÏß¶¨Î»½á¹ûÒ²ÊÇÓĞĞ§µÄ");
+                sb.append("ï¿½ï¿½ï¿½ß¶ï¿½Î»ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½Î»ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½");
             } else if (location.getLocType() == BDLocation.TypeServerError) {
                 sb.append("\ndescribe : ");
-                sb.append("·şÎñ¶ËÍøÂç¶¨Î»Ê§°Ü£¬¿ÉÒÔ·´À¡IMEIºÅºÍ´óÌå¶¨Î»Ê±¼äµ½loc-bugs@baidu.com£¬»áÓĞÈË×·²éÔ­Òò");
+                sb.append("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¶¨Î»Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½IMEIï¿½ÅºÍ´ï¿½ï¿½å¶¨Î»Ê±ï¿½äµ½loc-bugs@baidu.comï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×·ï¿½ï¿½Ô­ï¿½ï¿½");
             } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
                 sb.append("\ndescribe : ");
-                sb.append("ÍøÂç²»Í¬µ¼ÖÂ¶¨Î»Ê§°Ü£¬Çë¼ì²éÍøÂçÊÇ·ñÍ¨³©");
+                sb.append("ï¿½ï¿½ï¿½ç²»Í¬ï¿½ï¿½ï¿½Â¶ï¿½Î»Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Í¨ï¿½ï¿½");
             } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
                 sb.append("\ndescribe : ");
-                sb.append("ÎŞ·¨»ñÈ¡ÓĞĞ§¶¨Î»ÒÀ¾İµ¼ÖÂ¶¨Î»Ê§°Ü£¬Ò»°ãÊÇÓÉÓÚÊÖ»úµÄÔ­Òò£¬´¦ÓÚ·ÉĞĞÄ£Ê½ÏÂÒ»°ã»áÔì³ÉÕâÖÖ½á¹û£¬¿ÉÒÔÊÔ×ÅÖØÆôÊÖ»ú");
+                sb.append("ï¿½Ş·ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ğ§ï¿½ï¿½Î»ï¿½ï¿½ï¿½İµï¿½ï¿½Â¶ï¿½Î»Ê§ï¿½Ü£ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ô­ï¿½ò£¬´ï¿½ï¿½Ú·ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½");
             }
         	sb.append("\nlocationdescribe : ");
-            sb.append(location.getLocationDescribe());// Î»ÖÃÓïÒå»¯ĞÅÏ¢
-            List<Poi> list = location.getPoiList();// POIÊı¾İ
+            sb.append(location.getLocationDescribe());
+            List<Poi> list = location.getPoiList();
             if (list != null) {
                 sb.append("\npoilist size = : ");
                 sb.append(list.size());
@@ -131,7 +132,7 @@ public class MainActivity extends Activity {
                 }
             }
             locationResult.setText(sb.toString());
-            Log.i("BaiduLocationApiDem", sb.toString());
+            Log.i(TAG, sb.toString());
         }
 	}
 }

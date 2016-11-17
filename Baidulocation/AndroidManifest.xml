@@ -34,8 +34,8 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="nnW6whG0zBTposzyNbqNV5b33FenXcoI" /> 
-            
+            android:value="NchCQPK7F9ZvKnGoIq14HG27UFrhlXrT" /> 
+        <!-- company:NchCQPK7F9ZvKnGoIq14HG27UFrhlXrT     -->
         <activity
             android:name="com.example.baidulocation.MainActivity"
             android:label="@string/app_name" >
