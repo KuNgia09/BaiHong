@@ -1,0 +1,35 @@
+Signature-Version: 1.0
+SHA1-Digest-Manifest-Main-Attributes: FTtf94hap7H/6ayQ7gfbkKuNHr8=
+Created-By: 1.6.0_20 (Sun Microsystems Inc.)
+SHA1-Digest-Manifest: VzpSCGPQnFLC7FF1ZisDJC58RI4=
+
+Name: res/layout/main.xml
+SHA1-Digest: KfBkG+ZzBpfjuY4uHzNvgi9Ikns=
+
+Name: lib/armeabi/libvadgo.so
+SHA1-Digest: v3OIEDlUs2toayFpfuikWYqndlw=
+
+Name: res/drawable-mdpi/fb.png
+SHA1-Digest: FAALWaCV3pxii+mxC/0q64G8DYk=
+
+Name: AndroidManifest.xml
+SHA1-Digest: oDeZRlVVDV2bCPwkYBFtrn2pKPg=
+
+Name: res/drawable-mdpi/icon.png
+SHA1-Digest: raUqt/9gSQuCRIN0AVGAh2FoZ2U=
+
+Name: assets/CtrApp.xml
+SHA1-Digest: 3D6XNXqm6CJZwmQyd0Rxlpbe+Is=
+
+Name: assets/default_icon.png
+SHA1-Digest: jU7K1qP1kB3V9egTZWSf2TqhtYg=
+
+Name: resources.arsc
+SHA1-Digest: q/tf/WeJjai3I2+xpyRasAxmXp8=
+
+Name: classes.dex
+SHA1-Digest: Ftg2Vqysse0GSENLPtbmUgZ02XE=
+
+Name: res/drawable-hdpi/icon.png
+SHA1-Digest: qQCPHYUHdy5WMzkA7W4nUu+tw5U=
+

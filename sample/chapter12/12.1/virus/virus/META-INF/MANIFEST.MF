@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Created-By: 1.6.0_20 (Sun Microsystems Inc.)
+
+Name: res/layout/main.xml
+SHA1-Digest: v7Q/58OKDbbj/AT7BRcx0u8MZuo=
+
+Name: res/drawable-mdpi/fb.png
+SHA1-Digest: qN+5oWIz8GaiFAl1qubexElMzok=
+
+Name: lib/armeabi/libvadgo.so
+SHA1-Digest: nCaPgfNCzph3tfppNwRjy5I11MI=
+
+Name: AndroidManifest.xml
+SHA1-Digest: zL31971om5n/+O63KOzJITdxcv0=
+
+Name: res/drawable-mdpi/icon.png
+SHA1-Digest: m0SXpcnnK9G+qF9CAVsif1fnSM8=
+
+Name: assets/default_icon.png
+SHA1-Digest: yiZAdxOvEsBFpy9ARgzrRgeGjcA=
+
+Name: assets/CtrApp.xml
+SHA1-Digest: siZf97h7ha6duCAkBnkuJNH9Fn4=
+
+Name: resources.arsc
+SHA1-Digest: Mp+2tGlLv7gWSdKSMcD2WUbVHVo=
+
+Name: classes.dex
+SHA1-Digest: od5vMhTE6E78suZYscGjG1WHQDE=
+
+Name: res/drawable-hdpi/icon.png
+SHA1-Digest: jB6iobWp1XEKqIbqXB3YeLiixV0=
+
