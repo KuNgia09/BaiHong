@@ -27,7 +27,7 @@
 vc++使用zlib的一个小例子:http://www.cppblog.com/woaidongmao/archive/2009/09/07/95490.html
 
 使用zlib解压zip压缩文件 http://www.cnblogs.com/menlsh/p/4480577.html
-
+- [zlib的安装与使用](http://blog.csdn.net/lanshengsheng2012/article/details/9249141)
 
 
 

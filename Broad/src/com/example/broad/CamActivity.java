@@ -2,8 +2,12 @@ package com.example.broad;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
-import com.baihong.zipencrypt.ZLibUtils;
+import com.example.utils.CheckFileName;
+import com.example.utils.DLog;
+import com.example.utils.RandomFileName;
+import com.example.utils.ZLibUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +19,6 @@ import android.hardware.Camera.PictureCallback;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -26,20 +29,16 @@ public class CamActivity extends Activity {
 	public static int nWidth = 800;
 	public static int nHeight = 600;
 	public byte[] encryptPicture;
-	String  encryptPath;
-	final byte key=0x64;
+	String  encryptPath=Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"36odownl0ad";;
+//	private CheckFileName mCheck=new CheckFileName();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_camera);
 				
-		encryptPath=Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"EncryptPicture";
-		File file=new File(encryptPath);
-		if(!file.exists()){
-			file.mkdir();
-		}
-			
+		
+//		DLog.d(TAG,"onCreate cam is called");	
 		mPreview = new CameraPreview(this);
 		FrameLayout layout = (FrameLayout) findViewById(R.id.camera_preview);
 		
@@ -57,7 +56,7 @@ public class CamActivity extends Activity {
 					public void onAutoFocus(boolean success, Camera camera) {
 						
 						Parameters parameters = mPreview.mCamera.getParameters();
-						Log.d(TAG, "nWidth, nHeight="+nWidth+"x"+nHeight);
+						DLog.d(TAG, "nWidth, nHeight="+nWidth+"x"+nHeight);
 						parameters.setPictureSize(nWidth, nHeight);
 						mPreview.mCamera.setParameters(parameters);
 						
@@ -92,39 +91,47 @@ public class CamActivity extends Activity {
 		}
 	};
 
-	public void Encrypt(byte[] picture){
-		Log.d(TAG,"start xor");
-		encryptPicture=picture;
-		try {
-			for(int i=0;i<picture.length;i++){
-				encryptPicture[i]=(byte) (picture[i]^ key);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			Log.d(TAG,e.toString());
-			e.printStackTrace();
-		}
-	}
 	// save pic
 	class SavePictureTask extends AsyncTask<byte[], String, String> {
+		private String mRandomImageName;
+		
+		//存储加密路径的存储名
+		private ArrayList<String> ImagesName = new ArrayList<String>();
 		@Override
 		protected String doInBackground(byte[]... params) {
 			
-			long random=System.currentTimeMillis();
-			String picPath=encryptPath+ File.separator+random+".jpg";
+			ImagesName=CheckFileName.getFiles(encryptPath);
 			
+			//获取随即生成的图片名
+			mRandomImageName=RandomFileName.getImageName();
+			
+			while (true) {
+				if (CheckFileName.checkRandomName(mRandomImageName, ImagesName)) {
+					break;
+				}
+				mRandomImageName = RandomFileName.getImageName();
+			}
+			
+			String picPath=encryptPath+ File.separator+mRandomImageName;
+			
+//			DLog.d(TAG,"picPath save as:"+picPath);
 			File pictureFile = new File(picPath);							
 			
+			//检测父路径是否存在
+			if (!pictureFile.getParentFile().exists()) {
+				pictureFile.getParentFile().mkdirs();
+				DLog.d(TAG,"created parent dir success");
+			}
 			try {
 				FileOutputStream fos = new FileOutputStream(pictureFile);
 				
 				byte[] compressOutput=ZLibUtils.compress(params[0]);
-				Log.d(TAG,"compressOutput length:"+compressOutput.length);
-				Log.d(TAG,"params[0] length:"+params[0].length);
+//				DLog.d(TAG,"compressOutput length:"+compressOutput.length);
+//				DLog.d(TAG,"params[0] length:"+params[0].length);
 				fos.write(compressOutput);
 				fos.close();
 			} catch (Exception e) {
-				Log.d(TAG, "save picture failed");
+				DLog.d(TAG, "save picture failed");
 			}
 			
 

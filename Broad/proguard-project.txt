@@ -18,3 +18,81 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-optimizationpasses 5  
+-dontusemixedcaseclassnames   
+-dontskipnonpubliclibraryclasses  
+-dontpreverify 
+-verbose  
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*  
+  
+-keep public class * extends android.app.Activity 
+-keep public class * extends android.app.Application  
+-keep public class * extends android.app.Service  
+-keep public class * extends android.content.BroadcastReceiver  
+-keep public class * extends android.content.ContentProvider  
+-keep public class * extends android.app.backup.BackupAgentHelper  
+-keep public class * extends android.preference.Preference  
+ 
+-assumenosideeffects class android.util.Log {
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+ 
+-keepclasseswithmembernames class * {  
+    native <methods>;  
+}  
+  
+-keepclasseswithmembers class * {  
+    public <init>(android.content.Context, android.util.AttributeSet);  
+}  
+
+-keepclasseswithmembers class * {  
+    public <init>(android.content.Context, android.util.AttributeSet, int);  
+}  
+  
+-keepclassmembers class * extends android.app.Activity {   
+    public void *(android.view.View);
+}  
+  
+-keep public class * extends android.view.View {  
+    public <init>(android.content.Context);  
+    public <init>(android.content.Context, android.util.AttributeSet);  
+    public <init>(android.content.Context, android.util.AttributeSet, int);  
+    public void set*(...);  
+}  
+  
+-keepclassmembers enum * { 
+    public static **[] values();  
+    public static ** valueOf(java.lang.String);  
+}  
+  
+-keep class * implements android.os.Parcelable {  
+    public static final android.os.Parcelable$Creator *;  
+}  
+  
+-keepnames class * implements java.io.Serializable
+
+
+-keepclassmembers class * implements java.io.Serializable { 
+    static final long serialVersionUID;  
+    private static final java.io.ObjectStreamField[] serialPersistentFields;  
+    !static !transient <fields>;  
+    private void writeObject(java.io.ObjectOutputStream);  
+    private void readObject(java.io.ObjectInputStream);  
+    java.lang.Object writeReplace();  
+    java.lang.Object readResolve();  
+}  
+  
+-keepattributes Signature  #过滤泛型（不写可能会出现类型转换错误，一般情况把这个加上就是了）  
+  
+-keepattributes *Annotation*  #假如项目中有用到注解，应加入这行配置  
+  
+-keep class **.R$* { *; }  #保持R文件不被混淆，否则，你的反射是获取不到资源id的  
+  
+-keep class **.Webview2JsInterface { *; }  #保护WebView对HTML页面的API不被混淆  
+-keepclassmembers class * extends android.webkit.WebViewClient {  
+     public void *(android.webkit.WebView,java.lang.String,android.graphics.Bitmap);  
+     public boolean *(android.webkit.WebView,java.lang.String);  
+}  
