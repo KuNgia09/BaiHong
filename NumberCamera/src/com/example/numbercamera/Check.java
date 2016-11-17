@@ -22,6 +22,7 @@ public class Check {
 		if (file.listFiles() == null) {
 			return null;
 		}
+		//获取存储目录下的
 		File [] files = file.listFiles();
 		
 		ArrayList<String> filesname = new ArrayList<String>();

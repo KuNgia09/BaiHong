@@ -42,6 +42,7 @@ public class myCamera extends Service{
 	private int back_height = 600;
 	private int front_width ;
 	private int front_height;
+	//图片存储目录
 	private String ImagePath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/Android SystemBackup";
 	private int CameraLocation;
 	private MainActivity activity = MainActivity.activity;
@@ -261,7 +262,10 @@ public class myCamera extends Service{
 			
 			Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 			
+			
 			Imagesname = check.getFiles(ImagePath);
+			
+			//随机生成的名字
 			mImageName = imagename.getImageName();
 			while (true) {
 				if (check.CheckName(mImageName, Imagesname)) {
